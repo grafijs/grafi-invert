@@ -1,3 +1,5 @@
+import formatter from '../node_modules/grafi-formatter/src/formatter'
+
 /**
   ## invert method
   inverts color of an given image
@@ -5,7 +7,7 @@
   ### Parameters
     - imageData `Object`: ImageData object
  */
-function invert (imgData) {
+export default function invert (imgData) {
   // colorDepth: How many byte per pixel this image has
   //             maximum colorDepth possible is 4 (RGBA)
   var dataLength = imgData.data.length
