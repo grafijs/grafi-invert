@@ -1,15 +1,10 @@
-(function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
-  typeof define === 'function' && define.amd ? define(['exports'], factory) :
-  (factory((global.grafi = global.grafi || {})));
-}(this, function (exports) { 'use strict';
-
+;(function () {
   /**
     ## ImageData object constructor
     Every return from grafi method is formatted to an ImageData object.
     This constructor is used when `window` is not available.
    */
-  function ImageData (pixelData, width, height){
+  function ImageData (pixelData, width, height) {
     this.width = width
     this.height = height
     this.data = pixelData
@@ -48,7 +43,6 @@
     }
     return new ImageData(pixelData, width, height)
   }
-
   /**
     ## invert method
     inverts color of an given image
@@ -74,6 +68,12 @@
     return formatter(processedPixeldata, imgData.width, imgData.height)
   }
 
-  exports.invert = invert;
+  var grafi = {}
+  grafi.invert = invert
 
-}));
+  if (typeof module === 'object' && module.exports) {
+    module.exports = grafi
+  } else {
+    this.grafi = grafi
+  }
+}())
