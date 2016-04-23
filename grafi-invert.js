@@ -65,6 +65,10 @@
 
     ### Parameters
       - imageData `Object`: ImageData object
+
+    ### Example
+        var input = { data: Uint8ClampedArray[400], width: 10, height: 10, }
+        grafi.invert(input)
    */
   function invert (imgData) {
     checkColorDepth(imgData)
