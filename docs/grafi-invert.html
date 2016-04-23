@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>grafi-invert.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>grafi-invert.js</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>;(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+  <span class="hljs-comment">/**
+    ## ImageData object constructor
+    Every return from grafi method is formatted to an ImageData object.
+    This constructor is used when `window` is not available.
+   */</span>
+  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">ImageData</span> (<span class="hljs-params">pixelData, width, height</span>) </span>{
+    <span class="hljs-keyword">this</span>.width = width
+    <span class="hljs-keyword">this</span>.height = height
+    <span class="hljs-keyword">this</span>.data = pixelData
+  }
+
+  <span class="hljs-comment">/**
+    ## formatter
+    Internal function used to format pixel data into ImageData object
+
+    ### Parameters
+      - pixelData `Uint8ClampedArray`: pixel representation of the image
+      - width `Number`: width of the image
+      - hight `Number`: height of the image
+
+    ### Example
+        formatter(new Uint8ClampedArray[400], 10, 10)
+</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <p>ImageData { data: Uint8ClampedArray[400], width: 10, height: 10, }</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   */
+  function formatter (pixelData, width, height) {
+    var colorDepth = pixelData.length / (width * height)</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <p>Length of pixelData must be multipul of available pixels (width * height).
+Maximum color depth allowed is 4 (RGBA)</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">Math</span>.round(colorDepth) !== colorDepth || colorDepth &gt; <span class="hljs-number">4</span>) {
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">'data and size of the image does now match'</span>)
+    }
+
+    <span class="hljs-keyword">if</span> (!(pixelData <span class="hljs-keyword">instanceof</span> <span class="hljs-built_in">Uint8ClampedArray</span>)) {
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">'pixel data passed is not an Uint8ClampedArray'</span>)
+    }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <p>If window is avilable create ImageData using browser API,
+otherwise call ImageData constructor</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> <span class="hljs-built_in">window</span> === <span class="hljs-string">'object'</span> &amp;&amp; colorDepth === <span class="hljs-number">4</span>) {
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">window</span>.ImageData(pixelData, width, height)
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> ImageData(pixelData, width, height)
+  }
+  <span class="hljs-comment">/**
+    ## invert method
+    inverts color of an given image
+
+    ### Parameters
+      - imageData `Object`: ImageData object
+   */</span>
+  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">invert</span> (<span class="hljs-params">imgData</span>) </span>{</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <p>colorDepth: How many byte per pixel this image has
+            maximum colorDepth possible is 4 (RGBA)</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">var</span> dataLength = imgData.data.length
+    <span class="hljs-keyword">var</span> colorDepth = dataLength / (imgData.width * imgData.height)
+    <span class="hljs-keyword">var</span> processedPixeldata = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Uint8ClampedArray</span>(dataLength)
+    <span class="hljs-keyword">var</span> i
+    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; dataLength; i++) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <p>colorDepth 4 = the image has Alpha channel, skip invert every 4th byte</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      <span class="hljs-keyword">if</span> (colorDepth === <span class="hljs-number">4</span> &amp;&amp; ((i + <span class="hljs-number">1</span>) % <span class="hljs-number">4</span>) === <span class="hljs-number">0</span>) {
+        processedPixeldata[i] = imgData.data[i]
+        <span class="hljs-keyword">continue</span>
+      }
+      processedPixeldata[i] = <span class="hljs-number">255</span> - imgData.data[i]
+    }
+    <span class="hljs-keyword">return</span> formatter(processedPixeldata, imgData.width, imgData.height)
+  }
+
+  <span class="hljs-keyword">var</span> grafi = {}
+  grafi.invert = invert
+
+  <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> <span class="hljs-built_in">module</span> === <span class="hljs-string">'object'</span> &amp;&amp; <span class="hljs-built_in">module</span>.exports) {
+    <span class="hljs-built_in">module</span>.exports = grafi
+  } <span class="hljs-keyword">else</span> {
+    <span class="hljs-keyword">this</span>.grafi = grafi
+  }
+}())</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>

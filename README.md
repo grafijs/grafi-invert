@@ -1,6 +1,6 @@
 # grafi-invert
 
-Invert color module for grafi
+Color invert module for grafi
 
 ## License
 Copyright 2016 Grafi project contributors

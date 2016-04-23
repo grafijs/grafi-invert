@@ -1,7 +1,7 @@
 {
   "name": "grafi-invert",
-  "version": "0.0.0",
-  "description": "",
+  "version": "0.0.1",
+  "description": "color invert module for grafi.js",
   "main": "grafi-invert.js",
   "scripts": {
     "test": "node grafi-invert.test.js",
